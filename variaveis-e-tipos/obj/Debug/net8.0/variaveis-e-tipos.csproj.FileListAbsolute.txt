@@ -1,0 +1,15 @@
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\bin\Debug\net8.0\variaveis-e-tipos.exe
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\bin\Debug\net8.0\variaveis-e-tipos.deps.json
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\bin\Debug\net8.0\variaveis-e-tipos.runtimeconfig.json
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\bin\Debug\net8.0\variaveis-e-tipos.dll
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\bin\Debug\net8.0\variaveis-e-tipos.pdb
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.AssemblyInfoInputs.cache
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.AssemblyInfo.cs
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.csproj.CoreCompileInputs.cache
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.sourcelink.json
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.dll
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\refint\variaveis-e-tipos.dll
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.pdb
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\variaveis-e-tipos.genruntimeconfig.cache
+C:\Users\bruno\OneDrive\Desktop\Github\praticando-csharp\variaveis-e-tipos\obj\Debug\net8.0\ref\variaveis-e-tipos.dll
