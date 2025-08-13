@@ -8,5 +8,10 @@ var calculandoArea = new CalculandoArea();
 //calculandoArea.calcularArea();
 
 var calcularMedia = new CalculandoMedia();
-calcularMedia.calcularMedia();
+//calcularMedia.calcularMedia();
 
+var convertendoTipos = new ConvertendoTipos();
+//convertendoTipos.conventerTipos();
+
+var controleDeVidas = new ControleDeVidas();
+controleDeVidas.jogar();
