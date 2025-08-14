@@ -14,4 +14,8 @@ var convertendoTipos = new ConvertendoTipos();
 //convertendoTipos.conventerTipos();
 
 var controleDeVidas = new ControleDeVidas();
-controleDeVidas.jogar();
+//controleDeVidas.jogar();
+
+//AumentoDeSalario.AumentarSalario();
+
+Circulo.CalcularAreaEPerimetro();
