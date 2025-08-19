@@ -29,3 +29,18 @@
 
 // MiniCalculadora.Calcular(operacao, num1, num2);
 
+// Console.WriteLine("1 - Manhã");
+// Console.WriteLine("2 - Tarde");
+// Console.WriteLine("3 - Noite");
+// Console.WriteLine("Que momento do dia é agora?");
+// int codigo = int.Parse(Console.ReadLine()!);
+// Console.WriteLine("Qual o seu nome? ");
+// string nome = Console.ReadLine()!;
+
+// Saudacao.Saudar(codigo, nome);
+
+// SistemaRecompensa.retornarRecompensa();
+
+//OrganizacaoDeLivros.OrganizarLivros();
+
+SistemaAutenticacao.AutenticarUsuario();
