@@ -8,4 +8,8 @@
 
 //SenhasDeAtendimento.GerarSenhas();
 
-ConversorTemperatura.converterTemperatura();
+//ConversorTemperatura.converterTemperatura();
+
+//PulandoNumeros.PularNumeros();
+
+TabelaMultiplicacao.Multiplicar();
