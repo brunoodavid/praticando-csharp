@@ -12,4 +12,10 @@
 
 //PulandoNumeros.PularNumeros();
 
-TabelaMultiplicacao.Multiplicar();
+//TabelaMultiplicacao.Multiplicar();
+
+//ClassificacaoNumeros.ClassificarNumeros();
+
+//LacoCerto.EscolhendoLacoCerto();
+
+Impares.QuantosImparesTem();
