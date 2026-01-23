@@ -4,4 +4,10 @@
 
 //SubstituindoPalavras.SubstituirPalavras();
 
-DividindoUmaString.DividirString();
+//DividindoUmaString.DividirString();
+
+//FormatandoRelatorio.formatarRelatorio();
+
+//VerificandoStringNumerica.verificarStringNumerica();
+
+ExtraindoValorDeMoeda.extrairValorDeMoeda();
