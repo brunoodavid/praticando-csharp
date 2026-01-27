@@ -24,3 +24,7 @@
 // caneta.RetirarProdutoEstoque(5);
 // caneta.RetirarProdutoEstoque(20);
 
+Pedido pedido1 = new Pedido("001", "Bruno", "Enviado");
+pedido1.ExibirPedido();
+pedido1.AtualizarPedido("Entregue");
+pedido1.ExibirPedido();
