@@ -24,7 +24,12 @@
 // caneta.RetirarProdutoEstoque(5);
 // caneta.RetirarProdutoEstoque(20);
 
-Pedido pedido1 = new Pedido("001", "Bruno", "Enviado");
-pedido1.ExibirPedido();
-pedido1.AtualizarPedido("Entregue");
-pedido1.ExibirPedido();
+// Pedido pedido1 = new Pedido("001", "Bruno", "Enviado");
+// pedido1.ExibirPedido();
+// pedido1.AtualizarPedido("Entregue");
+// pedido1.ExibirPedido();
+
+Consulta consulta1 = new Consulta("Bruno", "Leonardo", new DateTime(2026, 02, 28));
+consulta1.ExibirResumo();
+consulta1.Reagendar(new DateTime(2026, 3, 01));
+consulta1.ExibirResumo();
