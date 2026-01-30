@@ -19,4 +19,5 @@ Docente docente = new Docente("Docente de Matemática");
 Certificado cerf1 = new Certificado(analista);
 Certificado certf2 = new Certificado(docente);
 
-
+Pergaminho pergaminhoAntigo = new Pergaminho("Segredos_Antigos.txt", "A chave para a sabedoria reside na observação...");
+pergaminhoAntigo.mostrarDetalhes();
