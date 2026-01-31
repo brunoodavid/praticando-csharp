@@ -14,10 +14,31 @@
 // p1.ExibirDados();
 // p2.ExibirDados();
 
-Analista analista = new Analista("Analista de Sistemas");
-Docente docente = new Docente("Docente de Matemática");
-Certificado cerf1 = new Certificado(analista);
-Certificado certf2 = new Certificado(docente);
+// Analista analista = new Analista("Analista de Sistemas");
+// Docente docente = new Docente("Docente de Matemática");
+// Certificado cerf1 = new Certificado(analista);
+// Certificado certf2 = new Certificado(docente);
 
-Pergaminho pergaminhoAntigo = new Pergaminho("Segredos_Antigos.txt", "A chave para a sabedoria reside na observação...");
-pergaminhoAntigo.mostrarDetalhes();
+// Pergaminho pergaminhoAntigo = new Pergaminho("Segredos_Antigos.txt", "A chave para a sabedoria reside na observação...");
+// pergaminhoAntigo.mostrarDetalhes();
+
+// SensorTemperatura temp = new SensorTemperatura();
+// SensorPresenca presenca = new SensorPresenca();
+
+// temp.Ativar();
+// temp.Desativar();
+
+// presenca.Ativar();
+// presenca.Desativar();
+
+// Processador cpu = new Processador("Intel", "i7-12700K");
+// PlacaMae mobo = new PlacaMae("ASUS", "LGA1700");
+// Computador pc = new Computador(cpu, mobo);
+
+// pc.ExibirConfiguracao();
+
+PagamentoCredito cliente1 = new PagamentoCredito("André", "andre@email.com");
+PagamentoBoleto cliente2 = new PagamentoBoleto("Juliana", "juliana@email.com");
+
+cliente1.ProcessarPagamento();
+cliente2.ProcessarPagamento();
