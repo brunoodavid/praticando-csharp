@@ -37,8 +37,29 @@
 
 // pc.ExibirConfiguracao();
 
-PagamentoCredito cliente1 = new PagamentoCredito("André", "andre@email.com");
-PagamentoBoleto cliente2 = new PagamentoBoleto("Juliana", "juliana@email.com");
+// PagamentoCredito cliente1 = new PagamentoCredito("André", "andre@email.com");
+// PagamentoBoleto cliente2 = new PagamentoBoleto("Juliana", "juliana@email.com");
 
-cliente1.ProcessarPagamento();
-cliente2.ProcessarPagamento();
+// cliente1.ProcessarPagamento();
+// cliente2.ProcessarPagamento();
+
+// FuncionarioServico tecnico = new FuncionarioServico("João", "TI");
+// IServico s1 = new Manutencao("Atualização de servidor", tecnico);
+
+// FuncionarioServico analista = new FuncionarioServico("Marina", "Consultoria");
+// IServico s2 = new Consultoria("Planejamento estratégico", analista);
+
+// s1.ExecutarServico();
+// s2.ExecutarServico();
+
+Instrutor instrutor1 = new Instrutor("Carla", "Back-end");
+ICurso curso1 = new CursoProgramacao("C# com POO", instrutor1);
+ 
+Instrutor instrutor2 = new Instrutor("Felipe", "UI/UX");
+ICurso curso2 = new CursoDesign("Design de Interfaces", instrutor2);
+ 
+curso1.ValidarConteudo();
+curso1.PublicarCurso();
+ 
+curso2.ValidarConteudo();
+curso2.PublicarCurso();
