@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "orientacao-a-objetos-com-encapsulamento", "orientacao-a-objetos-com-encapsulamento.csproj", "{04F67B0E-9523-070A-5F77-B16B4BA74252}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04F67B0E-9523-070A-5F77-B16B4BA74252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F67B0E-9523-070A-5F77-B16B4BA74252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F67B0E-9523-070A-5F77-B16B4BA74252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F67B0E-9523-070A-5F77-B16B4BA74252}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA5E6F86-FF15-4290-9088-6A3943027EEC}
+	EndGlobalSection
+EndGlobal
