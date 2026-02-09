@@ -27,8 +27,14 @@
 // projeto.AdicionarTarefa("Implementar banco de dados");
 // projeto.ExibirTarefas();
 
-ContaBancaria conta = new ContaBancaria("Carlos Silva", 2500);
-conta.Sacar(1500); // inválido
-conta.Sacar(800);  // válido
+// ContaBancaria conta = new ContaBancaria("Carlos Silva", 2500);
+// conta.Sacar(1500); // inválido
+// conta.Sacar(800);  // válido
 
-Console.WriteLine($"Saldo atual: R$ {conta.Saldo}");
+// Console.WriteLine($"Saldo atual: R$ {conta.Saldo}");
+
+Agenda agenda = new Agenda("Marina Souza");
+agenda.AdicionarContato(new Contato("Carlos", "11998887777"));
+agenda.AdicionarContato(new Contato("Carlos", "11991112222")); // duplicado
+agenda.AdicionarContato(new Contato("Julia", "21988776655"));
+agenda.ListarContatos();
