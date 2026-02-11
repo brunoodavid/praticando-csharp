@@ -9,14 +9,37 @@
 // Console.WriteLine(f1.GerarRelatorio());
 // Console.WriteLine(f2.GerarRelatorio());
 
-List<INotificacao> notificacoes = new List<INotificacao>
+// List<INotificacao> notificacoes = new List<INotificacao>
+// {
+//     new Email(),
+//     new Sms(),
+//     new Push()
+// };
+
+// foreach (var notificacao in notificacoes)
+// {
+//     notificacao.EnviarMensagem("Sistema fora do ar!");
+// }
+
+// List<TarefaAgendada> tarefasAgendadas = new List<TarefaAgendada>
+// {
+//     new BackupTarefa(),
+//     new RelatorioTarefa(),
+//     new LimpezaTarefa()
+// };
+
+// foreach (var tarefaAgendada in tarefasAgendadas)
+// {
+//     tarefaAgendada.Executar();
+// }
+
+List<Midia> midias = new List<Midia>
 {
-    new Email(),
-    new Sms(),
-    new Push()
+    new Imagem("paisagem.jpg", "1920x1080"),
+    new Video("filme.mp4", 120)
 };
 
-foreach (var notificacao in notificacoes)
+foreach (var midia in midias)
 {
-    notificacao.EnviarMensagem("Sistema fora do ar!");
+    midia.ExibirDetalhes();
 }
