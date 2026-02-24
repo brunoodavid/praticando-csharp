@@ -6,17 +6,69 @@ var carrinho = new List<Produto>()
     new Produto() { Nome = "Manteiga", Preco = 3.99 }
 };
 
-var diasDaSemana = new DiasDaSemana(); 
+var diasDaSemana = new DiasDaSemana();
 
-foreach(var dia in diasDaSemana)
-{
-    Console.WriteLine(dia);
-}
+
 //PercorrendoComForEach();
+// percorrendoComEnumarator();
+
+var numerosPares = NumerosParesComYield();
+var contador = 0;
+foreach (var pares in numerosPares)
+{
+    contador++;
+    Console.WriteLine(pares);
+    if (contador > 5) break;
+}
+
+IEnumerable<int> NumerosParesComYield()
+{
+    var i = 0;
+    while (true)
+    {
+        Console.WriteLine($"Processando elemento {i} ...");
+        yield return i * 2;
+        if (i >= 100)
+        {
+            yield break;
+        }
+        i++;
+    }
+}
+
+IEnumerable<int> NumerosParesSemYield(int limite)
+{
+    var Lista = new List<int>();
+    for (int i = 0; i < limite; i++)
+    {
+        Console.WriteLine($"Processando elemento {i} ...");
+        Lista.Add(i * 2);
+    }
+
+    return Lista;
+}
+
+void percorrendoComEnumarator()
+{
+    var enumarator = diasDaSemana.GetEnumerator();
+    while (enumarator.MoveNext())
+    {
+        var dia = enumarator.Current;
+        Console.WriteLine(dia);
+    }
+}
+
+void percorrendoDiasDaSemana()
+{
+    foreach (var dia in diasDaSemana)
+    {
+        Console.WriteLine(dia);
+    }
+}
 
 void PercorrendoComFor()
 {
-    for(int i = 0; i < carrinho.Count; i++)
+    for (int i = 0; i < carrinho.Count; i++)
     {
         var produto = carrinho[i];
         Console.WriteLine($"Produto: {produto.Nome}");
@@ -25,7 +77,7 @@ void PercorrendoComFor()
 
 void PercorrendoComForEach()
 {
-    foreach(var produto in carrinho)
+    foreach (var produto in carrinho)
     {
         Console.WriteLine($"Produto: {produto.Nome}");
     }
@@ -46,7 +98,7 @@ class DiasDaSemanaEnumarator : IEnumerator<string>
 
     public void Dispose()
     {
-        
+
     }
 
     public bool MoveNext()
@@ -65,7 +117,13 @@ class DiasDaSemana : IEnumerable<string>
 {
     public IEnumerator<string> GetEnumerator()
     {
-        return new DiasDaSemanaEnumarator();
+        yield return "Domingo";
+        yield return "Segunda";
+        yield return "Terça";
+        yield return "Quarta";
+        yield return "Quinta";
+        yield return "Sexta";
+        yield return "Sábado";
     }
 
     IEnumerator IEnumerable.GetEnumerator()
