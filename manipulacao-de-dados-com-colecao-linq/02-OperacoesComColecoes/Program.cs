@@ -11,12 +11,12 @@ quanto aleatório.
 */
 
 //Funcoes que vamos implementar:
-// [ ] Criar as classes para musicas e playlist
-// [ ] Listar musicas da playlist
-// [ ] Adicionar musica à playlist
-// [ ] Obter uma musica especifica da playlist
-// [ ] Remover musica da playlist
-// [ ] Tocar uma musica aleatoria da playlist
+// [x] Criar as classes para musicas e playlist
+// [x] Listar musicas da playlist
+// [x] Adicionar musica à playlist
+// [x] Obter uma musica especifica da playlist
+// [x] Remover musica da playlist
+// [x] Tocar uma musica aleatoria da playlist
 // [ ] Reordenar musicas segundo alguma logica especifica (ex. duracao)
 // [ ] Uma playlist nao pode ter musicas repetidas
 // [ ] Exibir as 10 musicas mais tocadas em todas as playlists (ranking)
@@ -47,6 +47,9 @@ rockNacional.Add(musica5);
 
 ExibirPlaylist(rockNacional);
 
+
+
+
 void ExibirPlaylist(Playlist playlist)
 {
     Console.WriteLine($"Tocando as músicas de {playlist.Nome}");
@@ -55,16 +58,44 @@ void ExibirPlaylist(Playlist playlist)
         Console.WriteLine($"\t - {musica.Titulo}");
     }
 }
+
+void RemoverMusicaPeloTitulo(Playlist playlist, string titulo)
+{
+    var musicaEncontrada = playlist.ObterPeloTitulo(titulo);
+    if(musicaEncontrada is not null)
+    {
+        Console.WriteLine("Removendo música...");
+        playlist.Remove(musicaEncontrada);
+    }
+    else
+    {
+        Console.WriteLine("Música não encontrada!");
+    }
+    
+    ExibirPlaylist(playlist);
+}
+
+void ExibirMusicaAleatoria(Playlist playlist)
+{
+    var musicaAleatoria = playlist.ObterAleatorio();
+    if(musicaAleatoria is not null)
+    {
+        Console.WriteLine($"A música aleatória é: {musicaAleatoria?.Titulo}");    
+    } else
+    {
+        Console.WriteLine("Playlist vazia");
+    }
+}
 public class Musica
 {
-    public string Titulo { get; set; }
-    public string Artista { get; set; }
+    public string? Titulo { get; set; }
+    public string? Artista { get; set; }
     public int Duracao { get; set; }
 }
 
 public class Playlist : ICollection<Musica>
 {
-    public string Nome { get; set; }
+    public string? Nome { get; set; }
 
     public List<Musica> Lista = [];
     public int Count => Lista.Count;
@@ -79,6 +110,29 @@ public class Playlist : ICollection<Musica>
     public void Clear()
     {
         Lista.Clear();
+    }
+
+    public Musica? ObterPeloTitulo(string titulo)
+    {
+        foreach(var musica in Lista)
+        {
+            if(musica.Titulo == titulo)
+            {
+                return musica;
+            }
+        }
+        return null;
+    }
+    
+    public Musica? ObterAleatorio()
+    {
+        if(Lista.Count == 0) return null;
+
+        var random = new Random();
+        var numeroAleatorio = random.Next(0, Lista.Count - 1);
+        return Lista[numeroAleatorio];
+
+
     }
 
     public bool Contains(Musica item)
