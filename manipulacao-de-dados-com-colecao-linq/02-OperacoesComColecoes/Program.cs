@@ -20,8 +20,8 @@ quanto aleatório.
 // [x] Reordenar musicas segundo alguma logica especifica (ex. duracao)
 // [x] Uma playlist nao pode ter musicas repetidas
 // [x] Exibir as 10 musicas mais tocadas em todas as playlists (ranking)
-// [ ] Player de musica com:
-// [ ] - Fila de reproducao (para musicas avulsas e/ou playlists)
+// [x] Player de musica com:
+// [x] - Fila de reproducao (para musicas avulsas e/ou playlists)
 // [ ] - Historico de reproducao
 
 
@@ -53,9 +53,26 @@ legiaoUrbana.Add(musica2);
 legiaoUrbana.Add(musica4);
 legiaoUrbana.Add(musica5);
 
-ExibirPlaylist(rockNacional);
-ExibirPlaylist(legiaoUrbana);
-ExibirMaisTocadas(rockNacional, legiaoUrbana);
+var player = new PlayerDeMusica();
+player.AdicionarNaFila(musica1);
+player.AdicionarNaFila(rockNacional);
+
+var proxima = player.ProximaMusicaDaFila();
+if (proxima is not null)
+{
+    Console.WriteLine($"Tocando a musica {proxima.Titulo}...");
+}
+else
+{
+    Console.WriteLine("Fila de reprodução vazia!");
+}
+
+ExibirFila(player);
+
+
+// ExibirPlaylist(rockNacional);
+// ExibirPlaylist(legiaoUrbana);
+// ExibirMaisTocadas(rockNacional, legiaoUrbana);
 
 // Console.WriteLine("Playlist como foi criada!");
 // ExibirPlaylist(rockNacional);
@@ -71,6 +88,15 @@ ExibirMaisTocadas(rockNacional, legiaoUrbana);
 // rockNacional.OrdernarPorTitulo();
 // Console.WriteLine("Playlist alterada por título.");
 // ExibirPlaylist(rockNacional);
+
+void ExibirFila(PlayerDeMusica player)
+{
+    Console.WriteLine($"\nExibindo a fila de reprodução:");
+    foreach (var musica in player.Fila())
+    {
+        Console.WriteLine($"{'\t'} - {musica.Titulo}");
+    }
+}
 
 void ExibirMaisTocadas(Playlist playlist1, Playlist playlist2)
 {
@@ -287,5 +313,37 @@ public class Playlist : ICollection<Musica>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+}
+
+public class PlayerDeMusica
+{
+    public Queue<Musica> fila = [];
+
+    public void AdicionarNaFila(Musica musica)
+    {
+        fila.Enqueue(musica);
+    }
+
+    public void AdicionarNaFila(Playlist playlist)
+    {
+        foreach(var musica in playlist)
+        {
+            AdicionarNaFila(musica);
+        }
+    }
+
+    public IEnumerable<Musica> Fila()
+    {
+        foreach(var musica in fila)
+        {
+            yield return musica;
+        }
+    }
+
+    public Musica? ProximaMusicaDaFila()
+    {
+        if(fila.Count == 0) return null;
+        return fila.Dequeue();
     }
 }
