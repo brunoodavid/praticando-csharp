@@ -18,8 +18,8 @@ quanto aleatório.
 // [x] Remover musica da playlist
 // [x] Tocar uma musica aleatoria da playlist
 // [x] Reordenar musicas segundo alguma logica especifica (ex. duracao)
-// [ ] Uma playlist nao pode ter musicas repetidas
-// [ ] Exibir as 10 musicas mais tocadas em todas as playlists (ranking)
+// [x] Uma playlist nao pode ter musicas repetidas
+// [x] Exibir as 10 musicas mais tocadas em todas as playlists (ranking)
 // [ ] Player de musica com:
 // [ ] - Fila de reproducao (para musicas avulsas e/ou playlists)
 // [ ] - Historico de reproducao
@@ -46,8 +46,19 @@ rockNacional.Add(musica4);
 rockNacional.Add(musica5);
 rockNacional.Add(new Musica { Titulo = "Eduardo e Mônica", Artista = "Legião Urbana", Duracao = 530 });
 
-Console.WriteLine("Playlist como foi criada!");
+var legiaoUrbana = new Playlist { Nome = "Mais populares da legião" };
+
+legiaoUrbana.Add(musica1);
+legiaoUrbana.Add(musica2);
+legiaoUrbana.Add(musica4);
+legiaoUrbana.Add(musica5);
+
 ExibirPlaylist(rockNacional);
+ExibirPlaylist(legiaoUrbana);
+ExibirMaisTocadas(rockNacional, legiaoUrbana);
+
+// Console.WriteLine("Playlist como foi criada!");
+// ExibirPlaylist(rockNacional);
 
 // rockNacional.OrdernarPorDuracao();
 // Console.WriteLine("Playlist alterada pela duração.");
@@ -60,6 +71,41 @@ ExibirPlaylist(rockNacional);
 // rockNacional.OrdernarPorTitulo();
 // Console.WriteLine("Playlist alterada por título.");
 // ExibirPlaylist(rockNacional);
+
+void ExibirMaisTocadas(Playlist playlist1, Playlist playlist2)
+{
+    Dictionary<Musica, int> ranking = [];
+
+    foreach (var musica in playlist1)
+    {
+        ranking.Add(musica, 1);
+    }
+
+    foreach (var musica in playlist2)
+    {
+        if (ranking.TryGetValue(musica, out int contagem))
+        {
+            contagem++;
+            ranking[musica] = contagem;
+        }
+        else
+        {
+            ranking[musica] = 1;
+        }
+    }
+
+    List<KeyValuePair<Musica, int>> top = new List<KeyValuePair<Musica, int>>(ranking);
+
+    top.Sort(new PorContagem());
+    Console.WriteLine("\nTop 3 músicas mais incluídas nas playlists:");
+    int contador = 1;
+    foreach (var par in top)
+    {
+        Console.WriteLine($"\t - {par.Key.Titulo}");
+        contador++;
+        if (contador > 3) break;
+    }
+}
 
 
 void ExibirPlaylist(Playlist playlist)
@@ -74,7 +120,7 @@ void ExibirPlaylist(Playlist playlist)
 void RemoverMusicaPeloTitulo(Playlist playlist, string titulo)
 {
     var musicaEncontrada = playlist.ObterPeloTitulo(titulo);
-    if(musicaEncontrada is not null)
+    if (musicaEncontrada is not null)
     {
         Console.WriteLine("Removendo música...");
         playlist.Remove(musicaEncontrada);
@@ -83,19 +129,28 @@ void RemoverMusicaPeloTitulo(Playlist playlist, string titulo)
     {
         Console.WriteLine("Música não encontrada!");
     }
-    
+
     ExibirPlaylist(playlist);
 }
 
 void ExibirMusicaAleatoria(Playlist playlist)
 {
     var musicaAleatoria = playlist.ObterAleatorio();
-    if(musicaAleatoria is not null)
+    if (musicaAleatoria is not null)
     {
-        Console.WriteLine($"A música aleatória é: {musicaAleatoria?.Titulo}");    
-    } else
+        Console.WriteLine($"A música aleatória é: {musicaAleatoria?.Titulo}");
+    }
+    else
     {
         Console.WriteLine("Playlist vazia");
+    }
+}
+
+public class PorContagem : IComparer<KeyValuePair<Musica, int>>
+{
+    public int Compare(KeyValuePair<Musica, int> x, KeyValuePair<Musica, int> y)
+    {
+        return y.Value.CompareTo(x.Value);
     }
 }
 
@@ -103,9 +158,9 @@ public class PorArtista : IComparer<Musica>
 {
     public int Compare(Musica? x, Musica? y)
     {
-        if(x is null || y is null ) return 0;
-        if(x is null) return 1;
-        if(y is null) return -1;
+        if (x is null || y is null) return 0;
+        if (x is null) return 1;
+        if (y is null) return -1;
         return x.Artista.CompareTo(y.Artista);
     }
 }
@@ -114,11 +169,11 @@ public class PorTitulo : IComparer<Musica>
 {
     public int Compare(Musica? x, Musica? y)
     {
-        if(x is null || y is null ) return 0;
+        if (x is null || y is null) return 0;
         // y é maior
-        if(x is null) return 1;
+        if (x is null) return 1;
         // x é maior
-        if(y is null) return -1;
+        if (y is null) return -1;
         return x.Titulo.CompareTo(y.Titulo);
     }
 }
@@ -129,18 +184,18 @@ public class Musica : IComparable
     public string? Artista { get; set; }
     public int Duracao { get; set; }
 
-        public int CompareTo(object? obj)
-        {
-            // iguais: 0 ; menor: -1; maior: 1;
-            if(obj is null) return 1;
+    public int CompareTo(object? obj)
+    {
+        // iguais: 0 ; menor: -1; maior: 1;
+        if (obj is null) return 1;
 
-            Musica outraMusica = obj as Musica;
-            return this.Duracao.CompareTo(outraMusica?.Duracao);
-        }
+        Musica outraMusica = obj as Musica;
+        return this.Duracao.CompareTo(outraMusica?.Duracao);
+    }
     public override bool Equals(object? obj)
     {
-        if(obj is null) return false;
-        if(obj is Musica outraMusica) return this.Titulo.Equals(outraMusica.Titulo) && this.Artista.Equals(outraMusica.Artista);
+        if (obj is null) return false;
+        if (obj is Musica outraMusica) return this.Titulo.Equals(outraMusica.Titulo) && this.Artista.Equals(outraMusica.Artista);
         return false;
     }
 
@@ -175,19 +230,19 @@ public class Playlist : ICollection<Musica>
 
     public Musica? ObterPeloTitulo(string titulo)
     {
-        foreach(var musica in Lista)
+        foreach (var musica in Lista)
         {
-            if(musica.Titulo == titulo)
+            if (musica.Titulo == titulo)
             {
                 return musica;
             }
         }
         return null;
     }
-    
+
     public Musica? ObterAleatorio()
     {
-        if(Lista.Count == 0) return null;
+        if (Lista.Count == 0) return null;
 
         var random = new Random();
         var numeroAleatorio = random.Next(0, Lista.Count - 1);
