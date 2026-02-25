@@ -17,7 +17,7 @@ quanto aleatório.
 // [x] Obter uma musica especifica da playlist
 // [x] Remover musica da playlist
 // [x] Tocar uma musica aleatoria da playlist
-// [ ] Reordenar musicas segundo alguma logica especifica (ex. duracao)
+// [x] Reordenar musicas segundo alguma logica especifica (ex. duracao)
 // [ ] Uma playlist nao pode ter musicas repetidas
 // [ ] Exibir as 10 musicas mais tocadas em todas as playlists (ranking)
 // [ ] Player de musica com:
@@ -35,19 +35,31 @@ var musica1 = new Musica { Titulo = "Que Pais é Esse?", Artista = "Legião Urba
 var musica2 = new Musica { Titulo = "Tempo Perdido", Artista = "Legião Urbana", Duracao = 455 };
 var musica3 = new Musica { Titulo = "Pro Dia Nascer Feliz", Artista = "Barão Vermelho", Duracao = 345 };
 var musica4 = new Musica { Titulo = "Eduardo e Mônica", Artista = "Legião Urbana", Duracao = 530 };
-var musica5 = new Musica { Titulo = "Geração Coca-Cola", Artista = "Legião Urbana", Duracao = 350 };
+var musica5 = new Musica { Titulo = "Geração Coca-Cola", Artista = "Legião Urbana", Duracao = 380 };
 
 var rockNacional = new Playlist { Nome = "Rock Nacional" };
 
-rockNacional.Add(musica1);
 rockNacional.Add(musica2);
+rockNacional.Add(musica1);
 rockNacional.Add(musica3);
 rockNacional.Add(musica4);
 rockNacional.Add(musica5);
+rockNacional.Add(new Musica { Titulo = "Eduardo e Mônica", Artista = "Legião Urbana", Duracao = 530 });
 
+Console.WriteLine("Playlist como foi criada!");
 ExibirPlaylist(rockNacional);
 
+// rockNacional.OrdernarPorDuracao();
+// Console.WriteLine("Playlist alterada pela duração.");
+// ExibirPlaylist(rockNacional);
 
+// rockNacional.OrdernarPorArtista();
+// Console.WriteLine("Playlist alterada por artista.");
+// ExibirPlaylist(rockNacional);
+
+// rockNacional.OrdernarPorTitulo();
+// Console.WriteLine("Playlist alterada por título.");
+// ExibirPlaylist(rockNacional);
 
 
 void ExibirPlaylist(Playlist playlist)
@@ -55,7 +67,7 @@ void ExibirPlaylist(Playlist playlist)
     Console.WriteLine($"Tocando as músicas de {playlist.Nome}");
     foreach (var musica in playlist)
     {
-        Console.WriteLine($"\t - {musica.Titulo}");
+        Console.WriteLine($"\t - {musica.Titulo} ({musica.Artista}) - {musica.Duracao}");
     }
 }
 
@@ -86,17 +98,63 @@ void ExibirMusicaAleatoria(Playlist playlist)
         Console.WriteLine("Playlist vazia");
     }
 }
-public class Musica
+
+public class PorArtista : IComparer<Musica>
+{
+    public int Compare(Musica? x, Musica? y)
+    {
+        if(x is null || y is null ) return 0;
+        if(x is null) return 1;
+        if(y is null) return -1;
+        return x.Artista.CompareTo(y.Artista);
+    }
+}
+
+public class PorTitulo : IComparer<Musica>
+{
+    public int Compare(Musica? x, Musica? y)
+    {
+        if(x is null || y is null ) return 0;
+        // y é maior
+        if(x is null) return 1;
+        // x é maior
+        if(y is null) return -1;
+        return x.Titulo.CompareTo(y.Titulo);
+    }
+}
+
+public class Musica : IComparable
 {
     public string? Titulo { get; set; }
     public string? Artista { get; set; }
     public int Duracao { get; set; }
+
+        public int CompareTo(object? obj)
+        {
+            // iguais: 0 ; menor: -1; maior: 1;
+            if(obj is null) return 1;
+
+            Musica outraMusica = obj as Musica;
+            return this.Duracao.CompareTo(outraMusica?.Duracao);
+        }
+    public override bool Equals(object? obj)
+    {
+        if(obj is null) return false;
+        if(obj is Musica outraMusica) return this.Titulo.Equals(outraMusica.Titulo) && this.Artista.Equals(outraMusica.Artista);
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return this.Titulo.GetHashCode() ^ this.Artista.GetHashCode();
+    }
 }
 
 public class Playlist : ICollection<Musica>
 {
     public string? Nome { get; set; }
 
+    public HashSet<Musica> set = [];
     public List<Musica> Lista = [];
     public int Count => Lista.Count;
 
@@ -104,7 +162,10 @@ public class Playlist : ICollection<Musica>
 
     public void Add(Musica item)
     {
-        Lista.Add(item);
+        if (set.Add(item))
+        {
+            Lista.Add(item);
+        }
     }
 
     public void Clear()
@@ -131,8 +192,21 @@ public class Playlist : ICollection<Musica>
         var random = new Random();
         var numeroAleatorio = random.Next(0, Lista.Count - 1);
         return Lista[numeroAleatorio];
+    }
 
+    public void OrdernarPorDuracao()
+    {
+        Lista.Sort();
+    }
 
+    public void OrdernarPorArtista()
+    {
+        Lista.Sort(new PorArtista());
+    }
+
+    public void OrdernarPorTitulo()
+    {
+        Lista.Sort(new PorTitulo());
     }
 
     public bool Contains(Musica item)
