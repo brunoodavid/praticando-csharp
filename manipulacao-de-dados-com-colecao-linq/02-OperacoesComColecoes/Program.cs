@@ -57,18 +57,34 @@ var player = new PlayerDeMusica();
 player.AdicionarNaFila(musica1);
 player.AdicionarNaFila(rockNacional);
 
-var proxima = player.ProximaMusicaDaFila();
-if (proxima is not null)
-{
-    Console.WriteLine($"Tocando a musica {proxima.Titulo}...");
-}
-else
-{
-    Console.WriteLine("Fila de reprodução vazia!");
-}
 
 ExibirFila(player);
 
+var proxima = player.ProximaMusicaDaFila();
+if (proxima is not null)
+{
+    Console.WriteLine($"\nTocando a musica {proxima.Titulo}...");
+}
+else
+{
+    Console.WriteLine("\nFila de reprodução vazia!");
+}
+
+ExibirFila(player);
+ExibirHistorico(player);
+
+var anterior = player.MusicaAnterior();
+if (anterior is not null)
+{
+    Console.WriteLine($"\nTocando a musica {anterior?.Titulo}...");
+}
+else
+{
+    Console.WriteLine("\nHistórico de reprodução vazia!");
+}
+
+ExibirFila(player);
+ExibirHistorico(player);
 
 // ExibirPlaylist(rockNacional);
 // ExibirPlaylist(legiaoUrbana);
@@ -89,12 +105,21 @@ ExibirFila(player);
 // Console.WriteLine("Playlist alterada por título.");
 // ExibirPlaylist(rockNacional);
 
+void ExibirHistorico(PlayerDeMusica playerDeMusica)
+{
+    Console.WriteLine("\nExibindo o histórico: ");
+    foreach(var musica in playerDeMusica.Historio())
+    {
+        Console.WriteLine($"\t- {musica.Titulo}");
+    }
+}
+
 void ExibirFila(PlayerDeMusica player)
 {
     Console.WriteLine($"\nExibindo a fila de reprodução:");
     foreach (var musica in player.Fila())
     {
-        Console.WriteLine($"{'\t'} - {musica.Titulo}");
+        Console.WriteLine($"\t - {musica.Titulo}");
     }
 }
 
@@ -318,7 +343,8 @@ public class Playlist : ICollection<Musica>
 
 public class PlayerDeMusica
 {
-    public Queue<Musica> fila = [];
+    private Queue<Musica> fila = [];       //primeiro a entrar, primeiro a sair (FIFO)
+    private Stack<Musica> _pilha = [];     //ultimo a entrar, primeiro a sair   (LIFO)
 
     public void AdicionarNaFila(Musica musica)
     {
@@ -344,6 +370,20 @@ public class PlayerDeMusica
     public Musica? ProximaMusicaDaFila()
     {
         if(fila.Count == 0) return null;
-        return fila.Dequeue();
+        var musica = fila.Dequeue();
+        _pilha.Push(musica);    
+        return musica;
+    }
+
+    public Musica? MusicaAnterior()
+    {
+        if(_pilha.Count == 0) return null;
+        return _pilha.Pop();
+    }
+
+    public IEnumerable<Musica> Historio()
+    {
+        foreach(var musica in _pilha)
+            yield return musica;
     }
 }
